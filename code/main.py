@@ -17,6 +17,7 @@ from tensorflow.keras.layers import Input, Dropout, Dense
 # Import data
 df = pd.read_csv('../dataset/app_reviews_all_annotated2.csv')
 df = df[['review', 'argument_cat', 'decision_cat']]
+#df['review'] = df['title'].fillna('') + df['review'].fillna('')
 
 # Remove missing rows
 df = df.dropna()
