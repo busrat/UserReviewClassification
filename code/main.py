@@ -21,6 +21,9 @@ df = df[['review', 'argument_cat', 'decision_cat']]
 # Remove missing rows
 df = df.dropna()
 
+df = df.groupby('argument_cat').filter(lambda x : len(x) > 1)
+df = df.groupby('decision_cat').filter(lambda x : len(x) > 1)
+
 # Convert to numeric for bert
 df['Argument'] = pd.Categorical(df['argument_cat'])
 df['Decision'] = pd.Categorical(df['decision_cat'])
