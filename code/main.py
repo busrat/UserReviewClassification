@@ -74,11 +74,10 @@ history = model.fit(x={'input_ids': x['input_ids']}, y={'argument': to_categoric
 
 
 # Evaluation
-testArg = to_categorical(df_test.argument_cat)
+testArg = to_categorical(df_test.argument_cat, 4)
 testDec = to_categorical(df_test.decision_cat)
 testReview = tokenizer(text=df_test['review'].to_list(), add_special_tokens=True,
                          max_length=maxLen, truncation=True, padding=True, 
                          return_tensors='tf', return_token_type_ids = False,
                          return_attention_mask = False, verbose = True)
-#modelEvalForArg = model.evaluate(x={'input_ids': testReview['input_ids']}, y={'argument': testArg})
-modelEvalForDec = model.evaluate(x={'input_ids': testReview['input_ids']}, y={'decision': testDec})
+modelEval = model.evaluate(x={'input_ids': testReview['input_ids']}, y={'argument': testArg, 'decision': testDec})
